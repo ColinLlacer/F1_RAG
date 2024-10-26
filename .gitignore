@@ -1,0 +1,14 @@
+# Environment variables
+.env
+*.env
+
+# Poetry virtual environment
+.venv/
+venv/
+
+# Logs
+logs/
+*.log
+
+# Data
+F1_RAG/wiki_downloader/data/

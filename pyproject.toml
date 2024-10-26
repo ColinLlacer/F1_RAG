@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "f1-rag"
+version = "0.1.0"
+description = "RAG system dedicated to retrieving relevant information about past F1 races. Also contains a wikipedia-downloader module to retrieve all articles related to F1."
+authors = ["Colin Llacer"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+haystack = "^0.42"
+wikipedia-api = "^0.7.1"
+pytest = "^8.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
