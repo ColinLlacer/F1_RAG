@@ -12,3 +12,8 @@ logs/
 
 # Data
 F1_RAG/wiki_downloader/data/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
