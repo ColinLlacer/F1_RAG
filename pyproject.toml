@@ -10,6 +10,8 @@ python = "^3.10"
 wikipedia-api = "^0.7.1"
 pytest = "^8.3.3"
 haystack-ai = "^2.6.1"
+python-dotenv = "^1.0.1"
+sentence-transformers = "^3.2.1"
 
 
 [build-system]

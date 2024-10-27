@@ -44,21 +44,14 @@ def validate_documents(documents: List[Union[str, Path]]) -> List[str]:
         doc_paths.append(str(path))
     return doc_paths
 
-def process_batch(pipeline: Pipeline, batch: List[str]) -> None:
-    """
-    Process a single batch of documents through the pipeline.
-    
-    Args:
-        pipeline: Configured indexing pipeline
-        batch: List of document paths to process
-        
-    Raises:
-        RuntimeError: If pipeline execution fails
-    """
+def process_batch(pipeline, batch):
+    """Process a batch of documents through the indexing pipeline."""
     try:
-        pipeline.run({"converter": {"sources": batch}})
+        pipeline.run({
+            "sources": batch
+        })
     except Exception as e:
-        logger.error(f"Pipeline execution failed: {str(e)}")
+        logger.error(f"Error during document indexing: {str(e)}")
         raise RuntimeError(f"Pipeline execution failed: {str(e)}")
 
 def index_documents(
