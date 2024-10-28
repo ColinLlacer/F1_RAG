@@ -129,8 +129,14 @@ class RAGSystem:
                     "prompt_builder": {"query": question}
                 }
             )
-            return result["generator"]
-            
+            # Extract and return only the replies
+            replies = result.get("generator", {}).get("replies", [])
+            if replies:
+                return replies[0]  # Return the first reply
+            else:
+                logger.warning("No replies generated.")
+                return None
+                
         except Exception as e:
             logger.error(f"Error processing question: {str(e)}")
             return None
@@ -151,7 +157,7 @@ def main():
                 
             answer = rag_system.query(question)
             if answer:
-                print(f"\nAnswer: {answer}")
+                print(f"\n{answer}")
             else:
                 print("\nFailed to generate answer")
                 
