@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "RAG system dedicated to retrieving relevant information about past F1 races. Also contains a wikipedia-downloader module to retrieve all articles related to F1."
 authors = ["Colin Llacer"]
 readme = "README.md"
+packages = [
+    { include = "F1_RAG", from = "." }
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -13,6 +16,10 @@ haystack-ai = "^2.6.1"
 python-dotenv = "^1.0.1"
 sentence-transformers = "^3.2.1"
 
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
 
 [build-system]
 requires = ["poetry-core"]

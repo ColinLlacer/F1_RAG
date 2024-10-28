@@ -99,9 +99,9 @@ def create_rag_pipeline(
         rag_pipeline.add_component("generator", generator)
 
         # Connect components
-        rag_pipeline.connect("query_embedder.embedding", "retriever.query_embedding")
-        rag_pipeline.connect("retriever.documents", "prompt_builder.documents")
-        rag_pipeline.connect("prompt_builder.prompt", "generator.prompt")
+        rag_pipeline.connect("query_embedder", "retriever")
+        rag_pipeline.connect("retriever", "prompt_builder")
+        rag_pipeline.connect("prompt_builder", "generator")
 
         logger.info("RAG pipeline created successfully")
         return rag_pipeline

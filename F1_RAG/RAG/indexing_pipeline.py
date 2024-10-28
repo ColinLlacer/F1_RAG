@@ -49,31 +49,34 @@ def create_indexing_pipeline(
     try:
         logger.info("Creating indexing pipeline...")
         
-        # Initialize embedder with proper model configuration
-        embedder = SentenceTransformersDocumentEmbedder(
-            model=model_name
-        )
-        
-        logger.debug("Initializing pipeline components")
+        # Initialize pipeline components
         try:
             text_converter = TextFileToDocument()
+            embedder = SentenceTransformersDocumentEmbedder(model=model_name)
             writer = DocumentWriter(document_store=document_store)
         except Exception as e:
             logger.error(f"Failed to initialize pipeline components: {str(e)}")
             raise RuntimeError(f"Pipeline component initialization failed: {str(e)}")
 
-        logger.debug("Creating pipeline and connecting components")
-        indexing_pipeline = Pipeline()
-        indexing_pipeline.add_component("converter", text_converter)
-        indexing_pipeline.add_component("embedder", embedder)
-        indexing_pipeline.add_component("writer", writer)
+        # Create pipeline
+        try:
+            indexing_pipeline = Pipeline()
+            indexing_pipeline.add_component("converter", text_converter)
+            indexing_pipeline.add_component("embedder", embedder)
+            indexing_pipeline.add_component("writer", writer)
 
-        indexing_pipeline.connect("converter", "embedder")
-        indexing_pipeline.connect("embedder", "writer")
+            # Connect components
+            indexing_pipeline.connect("converter", "embedder")
+            indexing_pipeline.connect("embedder", "writer")
+        except Exception as e:
+            logger.error(f"Failed to create pipeline: {str(e)}")
+            raise RuntimeError(f"Unexpected error creating indexing pipeline: {str(e)}")
 
         logger.info("Indexing pipeline created successfully")
         return indexing_pipeline
         
+    except RuntimeError:
+        raise
     except Exception as e:
         logger.error(f"Unexpected error creating indexing pipeline: {str(e)}")
-        raise
+        raise RuntimeError(f"Unexpected error creating indexing pipeline: {str(e)}")
