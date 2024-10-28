@@ -26,7 +26,13 @@ from haystack.document_stores.in_memory import InMemoryDocumentStore
 from F1_RAG.RAG.indexing_pipeline import create_indexing_pipeline
 from F1_RAG.RAG.document_processor import get_documents_from_directory, index_documents
 from F1_RAG.RAG.RAG_pipeline import create_rag_pipeline
-from F1_RAG.RAG.config import prompt
+from F1_RAG.RAG.config import (
+    prompt,
+    DEFAULT_EMBEDDER_MODEL,
+    DEFAULT_LLM_MODEL,
+    DEFAULT_BATCH_SIZE,
+    DEFAULT_TOP_K
+)
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -38,9 +44,9 @@ class RAGSystem:
     def __init__(
         self,
         docs_dir: str,
-        embedder_model: str = "sentence-transformers/all-MiniLM-L6-v2",
-        llm_model: str = "mistralai/Mixtral-8x7B-Instruct-v0.1",
-        batch_size: int = 1028
+        embedder_model: str = DEFAULT_EMBEDDER_MODEL,
+        llm_model: str = DEFAULT_LLM_MODEL,
+        batch_size: int = DEFAULT_BATCH_SIZE
     ):
         """
         Initialize RAG system with configuration parameters.
@@ -90,7 +96,7 @@ class RAGSystem:
                 llm_model=self.llm_model,
                 document_store=self.document_store,
                 prompt_template=prompt,
-                top_k=3
+                top_k=DEFAULT_TOP_K
             )
             
             logger.info("RAG system initialized successfully")

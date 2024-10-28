@@ -17,3 +17,6 @@ F1_RAG/wiki_downloader/data/
 __pycache__/
 *.py[cod]
 *$py.class
+
+#Pipeline files
+pipeline.png
