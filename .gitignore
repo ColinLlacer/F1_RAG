@@ -18,5 +18,18 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-#Pipeline files
+# Pipeline files
 pipeline.png
+
+# Poetry files
+poetry.lock
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
