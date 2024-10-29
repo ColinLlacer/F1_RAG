@@ -8,13 +8,8 @@ This system combines the power of LLMs with a specialized knowledge base of Form
 
 ## Features
 
-- **RAG Pipeline**: Combines document retrieval with language model generation
-- **FastAPI Backend**: RESTful API for easy integration
-- **Document Processing**: Automatic processing and indexing of F1-related documents
-- **Semantic Search**: Uses embeddings for accurate document retrieval
-- **Error Handling**: Comprehensive error handling and logging
-- **Modular Architecture**: Clean separation of concerns for easy maintenance
-
+- **Document Processing**: Automatic downloading, processing and indexing of F1-related documents
+  
 ## Technical Stack
 
 - **RAG Framework**: Haystack
