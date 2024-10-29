@@ -35,7 +35,7 @@ from haystack.components.generators import HuggingFaceAPIGenerator
 from haystack import Pipeline
 from haystack.utils import Secret
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("F1_RAG.RAG.rag_pipeline")
 
 def create_rag_pipeline(
     embedder_model: str = "sentence-transformers/all-MiniLM-L6-v2",

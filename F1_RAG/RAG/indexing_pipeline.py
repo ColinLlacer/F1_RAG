@@ -27,7 +27,8 @@ from haystack.components.converters import TextFileToDocument
 from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 from haystack.components.writers import DocumentWriter
 
-logger = logging.getLogger(__name__)
+# Configure logging
+logger = logging.getLogger("F1_RAG.RAG.indexing_pipeline")
 
 def create_indexing_pipeline(
     document_store: InMemoryDocumentStore,

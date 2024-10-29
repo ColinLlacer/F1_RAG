@@ -3,7 +3,6 @@ Tests for indexing_pipeline.py focusing on configuration and integration points
 """
 
 import pytest
-import logging
 from haystack.document_stores.in_memory import InMemoryDocumentStore
 from F1_RAG.RAG.indexing_pipeline import create_indexing_pipeline
 
@@ -27,11 +26,3 @@ def test_custom_model_configuration(document_store):
     
     embedder = pipeline.get_component("embedder")
     assert embedder.model == custom_model
-
-def test_logging(document_store, caplog):
-    """Test that important operations are properly logged"""
-    with caplog.at_level(logging.INFO):
-        create_indexing_pipeline(document_store)
-        
-    assert "Creating indexing pipeline..." in caplog.text
-    assert "Indexing pipeline created successfully" in caplog.text

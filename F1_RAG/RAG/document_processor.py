@@ -17,7 +17,7 @@ from typing import List, Union
 from haystack import Pipeline
 
 # Configure logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("F1_RAG.RAG.document_processor")
 
 def validate_documents(documents: List[Union[str, Path]]) -> List[str]:
     """

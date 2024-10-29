@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import List, Set
 import re
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("F1_RAG.wiki_downloader")
 
 class WikiCategoryDownloader:
     """Class to handle downloading Wikipedia articles from a category."""

@@ -31,39 +31,48 @@ def test_query_without_initialization(temp_docs_dir):
 
 def test_successful_query(temp_docs_dir):
     """Test successful query processing"""
-    expected_answer = "Test answer"
-    test_doc = temp_docs_dir / "test.txt"
+    # Create a test document file
+    test_doc = temp_docs_dir / "test_doc.txt"
+    test_doc.write_text("Test content")
     
-    with patch('F1_RAG.RAG.main.create_rag_pipeline') as mock_create_rag, \
-         patch('F1_RAG.RAG.main.get_documents_from_directory', return_value=[str(test_doc)]), \
-         patch('F1_RAG.RAG.main.index_documents') as mock_index:
+    with patch('F1_RAG.RAG.main.create_rag_pipeline') as mock_create_pipeline, \
+         patch('F1_RAG.RAG.main.get_documents_from_directory') as mock_get_docs:
         
-        # Configure mock pipeline
+        # Mock documents to return the actual test file path
+        mock_get_docs.return_value = [test_doc]
+        
+        # Create a mock pipeline that returns a specific response
         mock_pipeline = Mock()
-        mock_pipeline.run.return_value = {"generator": expected_answer}
-        mock_create_rag.return_value = mock_pipeline
+        mock_pipeline.run.return_value = {
+            "generator": {
+                "replies": ["Test answer"]
+            }
+        }
+        mock_create_pipeline.return_value = mock_pipeline
         
-        # Initialize and query
+        # Create and initialize RAG system
         rag_system = RAGSystem(docs_dir=str(temp_docs_dir))
         rag_system.initialize()
-        answer = rag_system.query("test question")
         
-        assert answer == expected_answer
-        # Verify index_documents was called
-        mock_index.assert_called_once()
+        # Test the query
+        result = rag_system.query("test question")
+        assert result == "Test answer"
+        
+        # Verify the pipeline was called correctly
+        mock_pipeline.run.assert_called_once()
 
 def test_query_error_handling(temp_docs_dir):
     """Test error handling during query processing"""
     test_doc = temp_docs_dir / "test.txt"
     
-    with patch('F1_RAG.RAG.main.create_rag_pipeline') as mock_create_rag, \
+    with patch('F1_RAG.RAG.main.create_rag_pipeline') as mock_create_pipeline, \
          patch('F1_RAG.RAG.main.get_documents_from_directory', return_value=[str(test_doc)]), \
          patch('F1_RAG.RAG.main.index_documents') as mock_index:
         
         # Configure mock pipeline to raise an exception
         mock_pipeline = Mock()
         mock_pipeline.run.side_effect = Exception("Pipeline error")
-        mock_create_rag.return_value = mock_pipeline
+        mock_create_pipeline.return_value = mock_pipeline
         
         # Initialize and query
         rag_system = RAGSystem(docs_dir=str(temp_docs_dir))

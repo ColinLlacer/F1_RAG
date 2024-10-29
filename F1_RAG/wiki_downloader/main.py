@@ -17,7 +17,7 @@ to the specified directory.
 
 import wikipediaapi
 from config.defaults import CONFIG
-from config.logging_config import setup_logging
+from F1_RAG.config.logging_config import setup_logging
 from wiki_downloader import WikiCategoryDownloader
 
 logger = setup_logging()

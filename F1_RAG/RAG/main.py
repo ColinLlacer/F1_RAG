@@ -26,16 +26,18 @@ from haystack.document_stores.in_memory import InMemoryDocumentStore
 from F1_RAG.RAG.indexing_pipeline import create_indexing_pipeline
 from F1_RAG.RAG.document_processor import get_documents_from_directory, index_documents
 from F1_RAG.RAG.RAG_pipeline import create_rag_pipeline
-from F1_RAG.RAG.config import (
+from F1_RAG.RAG.config.config import (
     prompt,
     DEFAULT_EMBEDDER_MODEL,
     DEFAULT_LLM_MODEL,
     DEFAULT_BATCH_SIZE,
     DEFAULT_TOP_K
 )
+from F1_RAG.config.logging_config import setup_logging
 
 # Configure logging
-logger = logging.getLogger(__name__)
+setup_logging()
+logger = logging.getLogger("F1_RAG.RAG.main")
 
 # Load environment variables from .env file
 load_dotenv()
