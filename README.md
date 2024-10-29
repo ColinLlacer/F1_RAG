@@ -8,7 +8,7 @@ This system combines the power of LLMs with a specialized knowledge base of Form
 
 ## Features
 
-- **Document Processing**: Automatic downloading, processing and indexing of F1-related documents
+- **Document Processing**: Automatic downloading, processing and indexing of F1-related wikipedia articles.
   
 ## Technical Stack
 
