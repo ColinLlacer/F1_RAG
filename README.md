@@ -1,10 +1,10 @@
 # F1 RAG System
 
-A Retrieval-Augmented Generation (RAG) system specialized in Formula 1 knowledge, built using FastAPI, Haystack, and Hugging Face's models.
+A Retrieval-Augmented Generation (RAG) system specialized in Formula 1 knowledge, built using Haystack and Hugging Face's models.
 
 ## Overview
 
-This system combines the power of Large Language Models with a specialized knowledge base of Formula 1 information to provide accurate and contextual answers to F1-related queries. It uses RAG architecture to ground LLM responses in factual F1 data.
+This system combines the power of LLMs with a specialized knowledge base of Formula 1 information to provide accurate and contextual answers to F1-related queries. It uses a basic RAG architecture to ground LLM responses in factual F1 data.
 
 ## Features
 
@@ -42,12 +42,9 @@ poetry install
 
 ```bash
 cp .env.example .env
-# Edit .env with your configurations
 ```
 
-Edit .env with your configurations
-
-4. Prepare the document database:
+4. Prepare the document database using the wikipedia-downloader module:
 
 ```bash
 poetry run python -m F1_RAG.wiki_downloader.downloader
@@ -56,7 +53,10 @@ poetry run python -m F1_RAG.wiki_downloader.downloader
 5. Run the app using Poetry (An API will be implemented in the future):
 
 ```bash
-poetry run python F1_RAG/api/run.py
+poetry run python F1_RAG/RAG/main.py
 ```
 
+6: Optional - Change the retrievable documents or models using the variables in the different configuration files.
+
+7: Ask your questions about F1!
 
